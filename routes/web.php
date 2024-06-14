@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Vacancy\EmployerController;
+use App\Http\Controllers\Vacancy\VacancyController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +19,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('/vacancies', VacancyController::class);
+Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.list');
+Route::resource('/employers', EmployerController::class);
+Route::get('/employers', [EmployerController::class, 'index'])->name('employers.list');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
