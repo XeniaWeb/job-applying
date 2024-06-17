@@ -1,1 +1,0 @@
-import{_ as o}from"./AppButton-De_lzK3p.js";import{o as t,c as a,w as e,r as s}from"./app-DdMog2nR.js";const p={__name:"PrimaryButton",setup(_){return(r,c)=>(t(),a(o,{color:"primary"},{default:e(()=>[s(r.$slots,"default")]),_:3}))}};export{p as _};

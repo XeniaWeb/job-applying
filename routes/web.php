@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\Vacancy\EmployerController;
+use App\Http\Controllers\Admin\Vacancy\VacancyController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Vacancy\EmployerController;
-use App\Http\Controllers\Vacancy\VacancyController;
+use App\Http\Controllers\Resume\ResumeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,10 +21,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/vacancies', VacancyController::class);
-Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.list');
-Route::resource('/employers', EmployerController::class);
-Route::get('/employers', [EmployerController::class, 'index'])->name('employers.list');
+Route::get('/cv/ru', [ResumeController::class, 'showCvRu'])->name('cv.ru');
+Route::get('/cv/en', [ResumeController::class, 'showCvEn'])->name('cv.en');
+Route::get('/cv/de', [ResumeController::class, 'showCvDe'])->name('cv.de');
+Route::resource('/cv', ResumeController::class);
+Route::get('/pdf', [ResumeController::class, 'downloadPdf'])->name('download_pdf');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

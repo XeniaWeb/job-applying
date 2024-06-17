@@ -22,20 +22,27 @@ defineProps({
 
 const items = [
   {
-    'name': 'Employers',
-    'route': 'employers.list',
-  },
-  {
     'name': 'Portfolio',
-    'route': '',
-  },
-  {
-    'name': 'My Skills & CV',
     'route': '',
   },
   {
     'name': 'Contacts',
     'route': '',
+  },
+];
+
+const cvs = [
+  {
+    'lang': 'CV on English',
+    'route': 'cv.en'
+  },
+  {
+    'lang': 'Lebenslauf auf Deutsch',
+    'route': 'cv.de'
+  },
+  {
+    'lang': 'Резюме на Русском языке',
+    'route': 'cv.ru'
   },
 ];
 </script>
@@ -78,9 +85,21 @@ const items = [
       <h1 class="heading-2 mb-10">
         This is Welcome Page
       </h1>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-between items-center gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-between items-center gap-4 h-full">
+        <ContentBox class="min-h-48 flex justify-around items-center col-span-2">
+          <h3 class="heading-3">My Skills & CV</h3>
+          <div class="">
+            <Link v-for="cv in cvs" :key="cv.route"
+                  :href="cv.route ? route(cv.route) : '/'">
+              <h4
+                class="heading-5 font-semibold hover:text-gray-700 hover:underline transition ease-in-out duration-150">
+                {{ cv.lang }}
+              </h4>
+            </Link>
+          </div>
+        </ContentBox>
         <ContentBox v-for="item in items" :key="item.name"
-                    class=" min-h-32 flex justify-center items-center col-span-1">
+                    class=" min-h-48 flex justify-center items-center col-span-1">
           <Link :href="item.route ? route(item.route) : '/'">
             <h3 class="heading-3">{{ item.name }}</h3>
           </Link>
