@@ -1,9 +1,10 @@
 .PHONY: help ps build build-prod start fresh fresh-prod stop restart destroy \
 	cache cache-clear migrate migrate migrate-fresh tests tests-html
 
-CONTAINER_PHP=laravel.test
-CONTAINER_REDIS=redis
-CONTAINER_DATABASE=pgsql
+CONTAINER_PHP=job-applying-laravel.test-1
+CONTAINER_REDIS=job-applying-redis-1
+#CONTAINER_DATABASE=job-applying-pgsql-1
+CONTAINER_DATABASE=job-applying-mysql-1
 
 help: ## Print help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
@@ -43,6 +44,9 @@ dev: ## Frontend dev
 
 ssh: ## SSH into PHP container
 	docker exec -it ${CONTAINER_PHP} sh
+
+db: ## Run into DB container
+	docker exec -it ${CONTAINER_DATABASE} bash
 
 install: ## Run composer install
 	@./vendor/bin/sail composer install

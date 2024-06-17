@@ -31,8 +31,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ])
-            // ->syncRoles(RoleName::ADMIN)
-        ;
+            ->syncRoles(RoleName::ADMIN);
     }
 
     public function createEditorUser(): void
@@ -43,8 +42,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ])
-            // ->syncRoles(RoleName::EDITOR)
-        ;
+            ->syncRoles(RoleName::EDITOR);
     }
 
     public function createCustomerUser(): void
@@ -55,7 +53,6 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ])
-            // ->syncRoles(RoleName::CUSTOMER)
-        ;
+            ->syncRoles(RoleName::CUSTOMER);
     }
 }
