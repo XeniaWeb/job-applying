@@ -1,0 +1,1 @@
+import{o as e,f as t,F as s,k as o,b as a,t as l}from"./app-DdMog2nR.js";const c=a("h1",{class:"text-red-600 font-bold text-2xl text-center"}," Employer Index",-1),u={__name:"EmployerIndex",props:{employers:{type:Object}},setup(n){return(p,d)=>(e(),t(s,null,[c,(e(!0),t(s,null,o(n.employers,r=>(e(),t("div",{key:r.id},l(r.name),1))),128))],64))}};export{u as default};
