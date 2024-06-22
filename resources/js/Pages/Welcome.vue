@@ -51,9 +51,11 @@ const cvs = [
   <Head title="Welcome"/>
   <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 min-h-screen px-4">
     <header class="py-4 mb-6 flex justify-between items-center max-w-6xl mx-auto">
-      <div class="w-20 flex justify-center items-center">
-        <AppLogoXeniaWeb class=""/>
-      </div>
+      <Link :href="route('welcome')">
+        <div class="w-20 flex justify-center items-center">
+          <AppLogoXeniaWeb class=""/>
+        </div>
+      </Link>
       <nav v-if="canLogin" class="flex flex-1 justify-end px-2">
         <Link
           v-if="$page.props.auth.user"
