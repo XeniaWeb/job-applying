@@ -9,6 +9,29 @@ import { Link } from '@inertiajs/vue3';
 import AppLogoXeniaWebMB from "@/Components/AppLogoXeniaWebMB.vue";
 
 const showingNavigationDropdown = ref(false);
+
+const navList = [
+  {
+    title: 'Applications',
+    route: 'customer.applications.index'
+  },
+  {
+    title: 'Vacancies',
+    route: 'customer.vacancies.index'
+  },
+  {
+    title: 'Employers',
+    route: 'customer.employers.index'
+  },
+  {
+    title: 'CV',
+    route: 'cv.en'
+  },
+  {
+    title: 'Home',
+    route: 'welcome'
+  },
+]
 </script>
 
 <template>
@@ -30,8 +53,8 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink v-for="navItem in navList" :href="route(navItem.route)" :active="route().current(navItem.route)">
+                                    {{ navItem.title }}
                                 </NavLink>
                             </div>
                         </div>
@@ -113,8 +136,8 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                        <ResponsiveNavLink v-for="navItem in navList" :href="route(navItem.route)" :active="route().current(navItem.route)">
+                          {{ navItem.title }}
                         </ResponsiveNavLink>
                     </div>
 
