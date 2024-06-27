@@ -1,6 +1,6 @@
 <script setup>
 import {Head, Link} from '@inertiajs/vue3';
-import AppLogoXeniaWeb from "@/Components/AppLogoXeniaWeb.vue";
+import AppLogoXeniaWebMB from "@/Components/AppLogoXeniaWebMB.vue";
 import ContentBox from "@/Components/UI/ContentBox.vue";
 
 defineProps({
@@ -50,10 +50,10 @@ const cvs = [
 <template>
   <Head title="Welcome"/>
   <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 min-h-screen px-4">
-    <header class="py-4 mb-6 flex justify-between items-center max-w-6xl mx-auto">
+    <header class="py-2 mb-6 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mx-auto">
       <Link :href="route('welcome')">
-        <div class="w-20 flex justify-center items-center">
-          <AppLogoXeniaWeb class=""/>
+        <div class="h-auto w-36 flex justify-center items-center">
+          <AppLogoXeniaWebMB class=""/>
         </div>
       </Link>
       <nav v-if="canLogin" class="flex flex-1 justify-end px-2">
@@ -83,7 +83,7 @@ const cvs = [
         </template>
       </nav>
     </header>
-    <div class=" max-w-6xl mx-auto">
+    <div class=" max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
       <h1 class="heading-2 mb-10">
         This is Welcome Page
       </h1>

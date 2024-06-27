@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Link, Head} from "@inertiajs/vue3";
-import UiLayout from "@/Layouts/UiLayout.vue";
+import {Head} from "@inertiajs/vue3";
 
 defineProps({
   employers: {
@@ -11,23 +10,21 @@ defineProps({
 </script>
 
 <template>
-  <Head title="Dashboard"/>
+  <Head title="Employers"/>
 
-  <UiLayout>
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Employers</h2>
-    </template>
-
-    <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+  <AuthenticatedLayout>
+    <div class="">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
         <div class="bg-white dark:bg-gray-800 overflow-x-auto shadow-sm sm:rounded-lg">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg  p-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                Our products
-                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
+              <caption
+                class="px-2 py-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800 mb-2">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Employers</h2>
+                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Employers for
+                  whose vacancies you applied, stay organized, get answers, and keep in touch.</p>
               </caption>
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-2 py-2 ">
                   Company name
@@ -53,7 +50,8 @@ defineProps({
               </tr>
               </thead>
               <tbody>
-              <tr v-for="item in employers" :key="item.id"  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <tr v-for="item in employers" :key="item.id"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ item.name }}
                 </th>
@@ -84,11 +82,7 @@ defineProps({
         </div>
       </div>
     </div>
-
-
-
-
-  </UiLayout>
+  </AuthenticatedLayout>
 </template>
 
 <style scoped>

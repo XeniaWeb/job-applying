@@ -1,22 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Customer\Vacancy;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreVacancyRequest;
-use App\Http\Requests\UpdateVacancyRequest;
-use App\Models\Vacancy;
+use App\Http\Requests\StoreEmployerRequest;
+use App\Http\Requests\UpdateEmployerRequest;
+use App\Models\Employer;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class VacancyController extends Controller
+class EmployerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(): Response|string
     {
-        return Inertia::render('Customer/Vacancy/VacancyIndex');
+        // TODO make Repository
+        $employers = Employer::all()->pluck([], 'id' );
+
+        return Inertia::render('Customer/Employer/EmployerIndex', [
+            'employers' => $employers,
+        ]);
     }
 
     /**
@@ -30,7 +35,7 @@ class VacancyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVacancyRequest $request)
+    public function store(StoreEmployerRequest $request)
     {
         //
     }
@@ -38,7 +43,7 @@ class VacancyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Vacancy $vacancy)
+    public function show(Employer $employer)
     {
         //
     }
@@ -46,7 +51,7 @@ class VacancyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vacancy $vacancy)
+    public function edit(Employer $employer)
     {
         //
     }
@@ -54,7 +59,7 @@ class VacancyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVacancyRequest $request, Vacancy $vacancy)
+    public function update(UpdateEmployerRequest $request, Employer $employer)
     {
         //
     }
@@ -62,7 +67,7 @@ class VacancyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vacancy $vacancy)
+    public function destroy(Employer $employer)
     {
         //
     }
