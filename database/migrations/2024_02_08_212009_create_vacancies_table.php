@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('city')->nullable();
+            $table->date('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

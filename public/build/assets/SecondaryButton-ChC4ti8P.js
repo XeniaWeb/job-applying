@@ -1,1 +1,0 @@
-import{_ as r}from"./AppButton-D6uT68w6.js";import{o as t,b as a,w as e,k as s}from"./app-CmtALMOE.js";const m={__name:"SecondaryButton",setup(_){return(o,c)=>(t(),a(r,{color:"secondary"},{default:e(()=>[s(o.$slots,"default")]),_:3}))}};export{m as _};

@@ -19,6 +19,12 @@ class Vacancy extends Model
         'title',
         'description',
         'employer_id',
+        'city',
+        'published_at'
+    ];
+
+    protected $casts =[
+        'published_at' => 'datetime',
     ];
 
     public function employer(): BelongsTo
