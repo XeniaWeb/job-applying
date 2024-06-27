@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/vue3";
+import PaginationMenu from "@/Components/Elemenrs/PaginationMenu.vue";
 
 defineProps({
   applications: {
@@ -15,7 +16,7 @@ defineProps({
 
   <AuthenticatedLayout>
     <div class="">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 pb-4">
         <div class="bg-white dark:bg-gray-800 overflow-x-auto shadow-sm sm:rounded-lg">
           <div class="relative overflow-x-auto min-w-max shadow-md sm:rounded-lg  p-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -59,10 +60,11 @@ defineProps({
               <tbody>
               <tr v-for="item in applications.data" :key="item.applyId"
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row"
+                    class="px-2 py-1 max-w-[11rem] text-wrap font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ item.vacancyTitle }}
                 </th>
-                <td class="px-1 py-1">
+                <td class="px-1 py-1 max-w-[10rem] text-wrap">
                   {{ item.employerName }}
                 </td>
                 <td class="px-1 py-1">
@@ -74,14 +76,14 @@ defineProps({
                 <td class="px-1 py-1">
                   {{ item.vacancyCity }}
                 </td>
-                <td class="px-1 py-1 text-wrap">
+                <td class="px-1 py-1 max-w-[12rem] text-wrap">
                   <p v-if="item.contact">
                     {{ item.contact }} </p>
                   <p v-if="item.employerContact">
                     {{ item.employerContact }}
                   </p>
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-1 py-1 max-w-[10rem] text-wrap">
                   {{ item.comment }}
                 </td>
                 <td class="px-1 py-1 text-right">
@@ -95,6 +97,7 @@ defineProps({
             </table>
           </div>
         </div>
+        <PaginationMenu :meta="applications.meta"/>
       </div>
     </div>
   </AuthenticatedLayout>

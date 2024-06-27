@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Vacancy;
+use App\Models\Application;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class VacancySeeder extends Seeder
+class ApplicationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Vacancy::factory(8)->create();
+        Application::factory(14)->create();
     }
 }

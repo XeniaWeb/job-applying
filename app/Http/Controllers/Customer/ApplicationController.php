@@ -19,7 +19,7 @@ class ApplicationController extends Controller
     public function index()
     {
         // TODO make Repository
-        $apps = Application::all()->load('vacancy');
+        $apps = Application::query()->paginate(6);
 
         $applications = ApplicationResource::collection($apps);
 

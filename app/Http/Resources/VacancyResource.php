@@ -19,7 +19,7 @@ class VacancyResource extends JsonResource
             'city' => $this->city,
             'title' => $this->title,
             'description' => $this->description,
-            'publishedDate' => $this->created_at->format('d.m.Y'),
+            'publishedDate' => $this->published_at->format('d.m.Y'),
 
             'employerId' => $this->employer_id,
             'employerName' => $this->employer->name,

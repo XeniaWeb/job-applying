@@ -44,9 +44,9 @@ const navList = [
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('welcome')">
+                                <Link :href="route('welcome')" class="focus:outline-none focus:ring focus:ring-offset-8 focus:rounded-lg focus:ring-primary-hover">
                                     <AppLogoXeniaWebMB
-                                        class="block h-auto w-36 fill-current text-gray-800 dark:text-gray-200"
+                                        class=" block h-auto w-36 fill-current text-gray-800 dark:text-gray-200"
                                     />
                                 </Link>
                             </div>
