@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/vue3";
+import {Head, Link} from "@inertiajs/vue3";
 import PaginationMenu from "@/Components/Elemenrs/PaginationMenu.vue";
 
 defineProps({
@@ -15,14 +15,40 @@ defineProps({
   <Head title="Applications"/>
 
   <AuthenticatedLayout>
+    <template #header>
+      <div class="flex justify-between items-center">
+        <h2 class="heading-2 my-0">Applications</h2>
+        <div class="flex items-center space-x-2 justify-between">
+          <Link class="block btn btn-secondary btn-outlined"
+                :href="route('customer.employers.create')"
+          >
+            <font-awesome-icon icon="plus"/>
+            Add Employer
+          </Link>
+          <Link class="inline-block btn btn-secondary btn-outlined"
+                :href="route('customer.vacancies.create')"
+          >
+            <font-awesome-icon icon="plus"/>
+            Add Vacancy
+          </Link>
+          <Link class="inline-block btn btn-primary"
+                :href="route('customer.applications.create')"
+          >
+            <font-awesome-icon icon="plus"/>
+            Add Application
+          </Link>
+        </div>
+      </div>
+    </template>
+
     <div class="">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 pb-4">
         <div class="bg-white dark:bg-gray-800 overflow-x-auto shadow-sm sm:rounded-lg">
           <div class="relative overflow-x-auto min-w-max shadow-md sm:rounded-lg  p-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <caption
-                class="px-2 py-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800 mb-2">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Applications</h2>
+                class="px-2 py-2 heading-3 my-0 text-left bg-white dark:text-white dark:bg-gray-800 mb-2">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Applications List</h2>
                 <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Applications you
                   made, stay organized, get answers, and keep in touch.</p>
               </caption>

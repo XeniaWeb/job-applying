@@ -162,7 +162,7 @@ const navList = [
 
             <!-- Page Heading -->
             <header class="bg-white dark:bg-gray-900 shadow dark:shadow-gray-800 shadow-gray-300 w-full z-10" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-10">
                     <slot name="header" />
                 </div>
             </header>

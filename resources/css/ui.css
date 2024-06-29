@@ -1,28 +1,28 @@
 /* ================== HEADINGS ======================== */
 
 .heading-1 {
-    @apply font-light font-sans text-5xl my-4
+    @apply font-light font-sans text-5xl my-4 dark:text-gray-200
 }
 .heading-2 {
-    @apply font-normal font-sans text-3xl my-4
+    @apply font-normal font-sans text-3xl my-4 dark:text-gray-200
 }
 .heading-3 {
-    @apply font-semibold font-sans text-2xl my-4
+    @apply font-semibold font-sans text-2xl my-4 dark:text-gray-200
 }
 .heading-4 {
-    @apply font-bold font-sans text-xl my-4
+    @apply font-bold font-sans text-xl my-4 dark:text-gray-200
 }
 .heading-5 {
-    @apply font-extrabold font-sans text-lg my-4
+    @apply font-extrabold font-sans text-lg my-4 dark:text-gray-200
 }
 .heading-6 {
-    @apply font-black font-sans text-base my-4
+    @apply font-black font-sans text-base my-4 dark:text-gray-200
 }
 
 /* ================== BUTTONS ======================== */
 
 .btn {
-    @apply bg-amber-950 inline-flex items-center justify-center gap-2 text-center mr-2 mb-2 text-white text-lg tracking-wider px-4 py-2 min-w-28 border rounded-md font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-25
+    @apply bg-amber-950 inline-flex items-center justify-center gap-2 text-center text-white text-lg tracking-wider px-4 py-2 min-w-28 border rounded-md font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-25
 }
 .btn-large {
     @apply py-4 px-6 text-xl

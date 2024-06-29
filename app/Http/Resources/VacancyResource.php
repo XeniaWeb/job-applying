@@ -24,5 +24,8 @@ class VacancyResource extends JsonResource
             'employerId' => $this->employer_id,
             'employerName' => $this->employer->name,
             'employerContact' => $this->employer->contact ?? '',
-        ];    }
+            'label' => '#' . $this->id . ' ' . $this->title,
+            'value' => $this->id,
+        ];
+    }
 }

@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\VacancyResource;
 use App\Models\Application;
-use Illuminate\Support\Facades\Request;
+use App\Models\Vacancy;
 use Inertia\Inertia;
 
 class ApplicationController extends Controller
@@ -33,7 +34,22 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        //
+        $vacancies = VacancyResource::collection(
+            Vacancy::query()->orderBy('created_at', 'desc')->get()
+        );
+
+        $statuses = collect(ApplyStatus::forSelect());
+        $appStatuses = [];
+        foreach ($statuses as $key => $status) {
+            $obj = new \stdClass();
+            $obj->label = $status;
+            $obj->value = $key;
+            $appStatuses[] = $obj;
+        }
+        return Inertia::render('Customer/Application/ApplicationCreate', [
+            'vacancies' => $vacancies,
+            'appStatuses' => $appStatuses,
+        ]);
     }
 
     /**
@@ -41,7 +57,8 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationRequest $request)
     {
-        //
+        //TODO store Application
+        return response('Получил');
     }
 
     /**
