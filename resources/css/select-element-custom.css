@@ -1,0 +1,38 @@
+
+
+:deep(.control) {
+    @apply rounded-md hover:border-gray-400 dark:hover:border-gray-200 shadow-sm  transition ease-in-out duration-150 focus:ring-4 focus:ring-inset focus:ring-lime-300 focus:border-transparent focus:border-primary focus:ring-primary;
+}
+
+:deep(.control.focused) {
+    @apply border-primary;
+    box-shadow: 0 0 0 1px #65a30d;
+}
+
+:deep([type='text']:focus) {
+    @apply rounded-sm !ring-primary;
+}
+
+:deep(.search-input::placeholder) {
+    @apply text-gray-300 dark:text-gray-400;
+}
+
+:deep(.vue-select) {
+    @apply rounded-md focus:border-primary focus:ring-4 focus:ring-inset focus:ring-lime-300 focus:border-transparent;
+}
+
+:deep(.value-container) {
+    @apply p-2;
+}
+
+:deep(.menu-option.focused) {
+    @apply bg-primary-hover/60
+}
+
+:deep(.menu-option.selected) {
+    @apply bg-primary-hover/60;
+}
+
+:deep(.menu-option:hover) {
+    @apply bg-primary-hover/30;
+}

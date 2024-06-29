@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Enums\ApplyStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\VacancyResource;
 use App\Models\Application;
-use Illuminate\Support\Facades\Request;
+use App\Models\Vacancy;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
 class ApplicationController extends Controller
@@ -31,17 +32,35 @@ class ApplicationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Inertia\Response
     {
-        //
+        $vacancies = VacancyResource::collection(
+            Vacancy::query()->orderBy('created_at', 'desc')->get()
+        );
+
+        return Inertia::render('Customer/Application/ApplicationCreate', [
+            'vacancies' => $vacancies,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApplicationRequest $request)
+    public function store(StoreApplicationRequest $request): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        if (!empty($data['letter_file'])) {
+                $card = $data['letter_file']->store('/', 'photos');
+            }
+        $apply = Application::create($data);
+
+        if (!empty($apply->letter_file)) {
+            $apply->update(['letter_file' => $card]);
+        }
+        $apply->fresh();
+
+        return response()->redirectToRoute('customer.applications.index');
     }
 
     /**
@@ -49,7 +68,8 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+        // TODO show Application
+        return 'Show ID = ' . $application->id;
     }
 
     /**
@@ -57,7 +77,8 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        //
+        // TODO edit Application
+        return 'Edit ID = ' . $application->id;
     }
 
     /**
@@ -71,8 +92,10 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Application $application)
+    public function destroy(Application $application): RedirectResponse
     {
-        //
+        $application->delete();
+
+        return response()->redirectToRoute('customer.applications.index');
     }
 }

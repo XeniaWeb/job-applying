@@ -7,9 +7,10 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSquareCaretRight, faHeart, faHand, faAddressBook,faCreditCard, faLemon, faHourglass } from '@fortawesome/free-regular-svg-icons'
+import {  faSquareCaretRight, faHeart, faHand, faAddressBook,faCreditCard, faLemon, faHourglass } from '@fortawesome/free-regular-svg-icons'
+import {faPlus, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 
-library.add([faSquareCaretRight, faHeart, faHand, faAddressBook,faCreditCard, faLemon, faHourglass])
+library.add([faArrowLeftLong, faPlus, faSquareCaretRight, faHeart, faHand, faAddressBook,faCreditCard, faLemon, faHourglass])
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
