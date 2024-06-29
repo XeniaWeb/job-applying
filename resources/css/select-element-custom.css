@@ -1,5 +1,3 @@
-
-
 :deep(.control) {
     @apply rounded-md hover:border-gray-400 dark:hover:border-gray-200 shadow-sm  transition ease-in-out duration-150 focus:ring-4 focus:ring-inset focus:ring-lime-300 focus:border-transparent focus:border-primary focus:ring-primary;
 }
@@ -26,7 +24,7 @@
 }
 
 :deep(.menu-option.focused) {
-    @apply bg-primary-hover/60
+    @apply bg-primary-hover/60;
 }
 
 :deep(.menu-option.selected) {

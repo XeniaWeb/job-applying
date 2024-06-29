@@ -1,0 +1,1 @@
+import{_ as r}from"./AppButton-CRjQ1_L4.js";import{o as t,b as a,w as e,k as s}from"./app-v9cEqxJc.js";const m={__name:"DangerButton",setup(_){return(o,n)=>(t(),a(r,{color:"danger"},{default:e(()=>[s(o.$slots,"default")]),_:3}))}};export{m as _};
