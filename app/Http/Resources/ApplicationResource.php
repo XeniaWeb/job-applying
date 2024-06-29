@@ -19,7 +19,7 @@ class ApplicationResource extends JsonResource
             'applyId' => $this->id,
             'vacancyId' => $this->vacancy_id,
             'status' => $this->status,
-            'dateApply' => $this->date_apply->format('d.m.Y') ?? 'Not applied',
+            'dateApply' => $this->date_apply?->format('d.m.Y') ?? 'Not applied',
             'contact' => $this->contact,
             'text' => $this->text ?? '',
             'letterFile' => $this->letter_file ?? '',

@@ -1,38 +1,31 @@
 <script setup>
 import TextInput from "@/Components/UI/TextInput.vue";
-import {ref} from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head, Link, useForm} from "@inertiajs/vue3";
-import Checkbox from "@/Components/Checkbox.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/UI/InputLabel.vue";
 import InputError from "@/Components/UI/InputError.vue";
 import VueSelect from "vue3-select-component";
-import VacancyIndex from "@/Pages/Admin/Vacancy/VacancyIndex.vue";
 
 defineProps({
   vacancies: {
     type: Object,
     required: true,
   },
-  appStatuses: {
-    type: Object,
-    required: true,
-  },
 })
 
-const form = useForm({
-  vacancy_id: [],
-  status: '',
-  date_apply: null,
+const newApplication = useForm({
+  vacancy_id: null,
   contact: '',
   text: '',
   letter_file: '',
   comment: '',
+  status: 'draft',
+  date_apply: '',
 });
 
 const submit = () => {
-  form.post(route('customer.applications.store'));
+  newApplication.post(route('customer.applications.store'));
 }
 </script>
 
@@ -72,18 +65,10 @@ const submit = () => {
                     <div class="">
                       <InputLabel for="vacancy_id" value="Vacancies"/>
                       <VueSelect
-                        v-model="form.vacancy_id"
+                        id="vacancy_id"
+                        v-model="newApplication.vacancy_id"
                         :options="vacancies.data"/>
-                      <InputError class="mt-2" :message="form.errors.vacancy_id"/>
-
-                    </div>
-                    <div>
-                      <InputLabel for="status_app" value="Status"/>
-                      <VueSelect
-                        id="status_app"
-                        v-model="form.status"
-                        :is-multi="false"
-                        :options="appStatuses"/>
+                      <InputError class="mt-2" :message="newApplication.errors.vacancy_id"/>
                     </div>
                     <div>
                       <InputLabel for="date_apply" value="Date of applying"/>
@@ -91,10 +76,9 @@ const submit = () => {
                         id="date_apply"
                         type="date"
                         class="block w-full"
-                        v-model="form.date_apply"
-                        required
+                        v-model="newApplication.date_apply"
                       />
-                      <InputError class="mt-2" :message="form.errors.date_apply"/>
+                      <InputError class="mt-2" :message="newApplication.errors.date_apply"/>
                     </div>
                     <div>
                       <InputLabel for="contact" value="Contact"/>
@@ -102,10 +86,10 @@ const submit = () => {
                         id="contact"
                         type="text"
                         class="block w-full"
-                        v-model="form.contact"
+                        v-model="newApplication.contact"
                         autocomplete="on"
                       />
-                      <InputError class="mt-2" :message="form.errors.contact"/>
+                      <InputError class="mt-2" :message="newApplication.errors.contact"/>
                     </div>
                     <div>
                       <InputLabel for="apply-text" value="Text of cover letter"/>
@@ -114,37 +98,35 @@ const submit = () => {
                         id="apply-text"
                         type="text"
                         class="mt-1 block w-full"
-                        v-model="form.text"
+                        v-model="newApplication.text"
                         autocomplete="on"
                         placeholder="Enter your cover letter text..."></textarea>
-                      <InputError class="mt-2" :message="form.errors.text"/>
-                    </div>
+                      <InputError class="mt-2" :message="newApplication.errors.text"/></div>
                     <div>
                       <InputLabel for="comment" value="Comment"/>
                       <TextInput
                         id="comment"
                         type="text"
                         class="mt-1 block w-full"
-                        v-model="form.comment"
+                        v-model="newApplication.comment"
                         autocomplete="on"
                         placeholder="Enter your comment text..."
                       />
-                      <InputError class="mt-2" :message="form.errors.comment"/>
+                      <InputError class="mt-2" :message="newApplication.errors.comment"/>
                     </div>
                     <div>
                       <InputLabel for="letter_file" value="Letter files"/>
-                      <TextInput
+                      <input
                         id="letter_file"
                         type="file"
                         class="mt-1 block w-full"
-                        v-model="form.letter_file"
-                        multiple="multiple"
-                        @input="form.letter_file = $event.target.files"
+                        name="letter_file"
+                        @input="newApplication.letter_file = $event.target.files[0]"
                       />
-                      <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                        {{ form.progress.percentage }}%
+                      <progress v-if="newApplication.progress" :value="newApplication.progress.percentage" max="100">
+                        {{ newApplication.progress.percentage }}%
                       </progress>
-                      <InputError class="mt-2" :message="form.errors.letter_file"/>
+                      <InputError class="mt-2" :message="newApplication.errors.letter_file"/>
                     </div>
                   </div>
                 </fieldset>
@@ -152,8 +134,8 @@ const submit = () => {
                 <div class="mt-4 ">
                   <PrimaryButton
                     class="flex justify-center w-full md:w-auto"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
+                    :class="{ 'opacity-25': newApplication.processing }"
+                    :disabled="newApplication.processing"
                     label="Save"
                   />
                 </div>

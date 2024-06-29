@@ -29,8 +29,8 @@ class StoreApplicationRequest extends FormRequest
             'contact' => ['required','string'],
             'text' => ['string', 'nullable'],
 
-            'letter_file' => ['nullable'],
-            'letter_file.*' => ['nullable', 'file'],
+            'letter_file' => ['nullable', 'file'],
+            // 'letter_file.*' => ['nullable', 'file'],
             'comment' => ['string', 'nullable'],
         ];
     }

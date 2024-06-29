@@ -1,13 +1,24 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
 import PaginationMenu from "@/Components/Elemenrs/PaginationMenu.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 
 defineProps({
   applications: {
     type: Object
   },
 })
+
+const destroy = (id) => {
+  if(confirm("Are you sure you want to delete this application?")) {
+    router.delete(route('customer.applications.destroy', id))
+  }
+}
+
+const showApp = (id) => {
+  router.get(route('customer.applications.show', id))
+}
 
 </script>
 
@@ -19,19 +30,19 @@ defineProps({
       <div class="flex justify-between items-center">
         <h2 class="heading-2 my-0">Applications</h2>
         <div class="flex items-center space-x-2 justify-between">
-          <Link class="block btn btn-secondary btn-outlined"
+          <Link class="block btn btn-secondary btn-outlined btn-small"
                 :href="route('customer.employers.create')"
           >
             <font-awesome-icon icon="plus"/>
             Add Employer
           </Link>
-          <Link class="inline-block btn btn-secondary btn-outlined"
+          <Link class="inline-block btn btn-secondary btn-outlined btn-small"
                 :href="route('customer.vacancies.create')"
           >
             <font-awesome-icon icon="plus"/>
             Add Vacancy
           </Link>
-          <Link class="inline-block btn btn-primary"
+          <Link class="inline-block btn btn-primary btn-small"
                 :href="route('customer.applications.create')"
           >
             <font-awesome-icon icon="plus"/>
@@ -87,7 +98,8 @@ defineProps({
               <tr v-for="item in applications.data" :key="item.applyId"
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row"
-                    class="px-2 py-1 max-w-[11rem] text-wrap font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    @click="showApp(item.applyId)"
+                    class="cursor-pointer hover:text-primary-focus px-2 py-1 max-w-[11rem] text-wrap font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ item.vacancyTitle }}
                 </th>
                 <td class="px-1 py-1 max-w-[10rem] text-wrap">
@@ -113,10 +125,11 @@ defineProps({
                   {{ item.comment }}
                 </td>
                 <td class="px-1 py-1 text-right">
-                  <a href="#" class="btn btn-small btn-outlined btn-primary">Edit</a>
+                  <Link :href="route('customer.applications.edit', item.applyId)" class="btn btn-small btn-outlined btn-primary">Edit</Link>
                 </td>
                 <td class="px-1 py-1 text-right">
-                  <a href="#" class="btn btn-small btn-danger">Del</a>
+                  <DangerButton @click="destroy(item.applyId)" type="submit" class="btn-small">Del
+                  </DangerButton>
                 </td>
               </tr>
               </tbody>
