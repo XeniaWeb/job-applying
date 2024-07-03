@@ -12,7 +12,7 @@ class UpdateApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,12 @@ class UpdateApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'vacancy_id' => ['required', 'integer', 'exists:vacancies,id'],
+            'status' => ['string', 'nullable'],
+            'date_apply' => ['nullable', 'date'],
+            'contact' => ['required','string'],
+            'text' => ['string', 'nullable'],
+            'comment' => ['string', 'nullable'],
         ];
     }
 }

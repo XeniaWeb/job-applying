@@ -79,12 +79,12 @@ const showApp = (id) => {
               <tbody>
                 <tr
                   v-for="item in applications.data"
-                  :key="item.applyId"
+                  :key="item.id"
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <th
                     scope="row"
-                    @click="showApp(item.applyId)"
+                    @click="showApp(item.id)"
                     class="cursor-pointer hover:text-primary-focus px-2 py-1 max-w-[11rem] text-wrap font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {{ item.vacancyTitle }}
@@ -114,13 +114,13 @@ const showApp = (id) => {
                   </td>
                   <td class="px-1 py-1 text-right">
                     <Link
-                      :href="route('customer.applications.edit', item.applyId)"
+                      :href="route('customer.applications.edit', item.id)"
                       class="btn btn-small btn-outlined btn-primary"
                       >Edit</Link
                     >
                   </td>
                   <td class="px-1 py-1 text-right">
-                    <DangerButton @click="destroy(item.applyId)" type="submit" class="btn-small">Del </DangerButton>
+                    <DangerButton @click="destroy(item.id)" type="submit" class="btn-small">Del </DangerButton>
                   </td>
                 </tr>
               </tbody>

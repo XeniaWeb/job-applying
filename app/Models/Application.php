@@ -13,11 +13,11 @@ class Application extends Model
 
     protected $fillable = [
         'vacancy_id',
+        'customer_id',
         'status',
         'date_apply',
         'contact',
         'text',
-        'letter_file',
         'comment',
     ];
 

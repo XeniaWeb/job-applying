@@ -22,12 +22,12 @@ class ApplicationFactory extends Factory
         $vacancies = Vacancy::query()->pluck('id');
 
         return [
+            'customer_id' => 3,
             'vacancy_id' => fake()->randomElement($vacancies),
             'status' => ApplyStatus::DRAFT,
             'date_apply' => fake()->dateTimeBetween('-5 days'),
-            'contact' => fake()->name . ', ' . fake()->phoneNumber ,
+            'contact' => fake()->name . ', ' . fake()->phoneNumber,
             'text' => fake()->realText(500),
-            'letter_file' => fake()->url,
             'comment' => fake()->realText(50),
         ];
     }

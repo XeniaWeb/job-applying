@@ -28,9 +28,6 @@ class StoreApplicationRequest extends FormRequest
             'date_apply' => ['nullable', 'date'],
             'contact' => ['required','string'],
             'text' => ['string', 'nullable'],
-
-            'letter_file' => ['nullable', 'file'],
-            // 'letter_file.*' => ['nullable', 'file'],
             'comment' => ['string', 'nullable'],
         ];
     }

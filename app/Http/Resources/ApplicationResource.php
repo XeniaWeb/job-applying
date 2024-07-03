@@ -16,17 +16,16 @@ class ApplicationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'applyId' => $this->id,
+            'id' => $this->id,
             'vacancyId' => $this->vacancy_id,
             'status' => $this->status,
-            'dateApply' => $this->date_apply?->format('d.m.Y') ?? 'Not applied',
+            'dateApply' => $this->date_apply->format('d.m.Y') ?? 'Not applied',
             'contact' => $this->contact,
             'text' => $this->text ?? '',
-            'letterFile' => $this->letter_file ?? '',
             'comment' => $this->comment ?? '',
 
-            "statusValue" => ApplyStatus::forSelect()[$this->status->value],
-            "statusValueShort" => ApplyStatus::forList()[$this->status->value],
+            'statusValue' => ApplyStatus::forSelect()[$this->status->value],
+            'statusValueShort' => ApplyStatus::forList()[$this->status->value],
 
             'vacancyTitle' => $this->vacancy->title,
             'vacancyDescription' => $this->vacancy->description,
