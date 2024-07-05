@@ -1,15 +1,22 @@
 <script setup>
 import TextInput from '@/Components/UI/TextInput.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, Link, router, useForm} from '@inertiajs/vue3';
+import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputLabel from '@/Components/UI/InputLabel.vue';
 import InputError from '@/Components/UI/InputError.vue';
+import VueSelect from 'vue3-select-component';
 
 const props = defineProps({
   application: {
     type: Object,
     required: true,
+  },
+  statuses: {
+    type: Array,
+  },
+  locale: {
+    type: String,
   },
 });
 
@@ -19,13 +26,20 @@ const apply = useForm({
   text: props.application.data.text,
   comment: props.application.data.comment,
   status: props.application.data.status,
-  date_apply: props.application.data.dateApply,
+  date_apply: props.application.data.dateApply === 'Not applied' ? null : props.application.data.dateApply,
   created_at: props.application.data.createdAt,
   vacancyTitle: props.application.data.vacancyTitle,
-  vacancyId: props.application.data.vacancyId,
+  vacancy_id: props.application.data.vacancyId,
   vacancyCity: props.application.data.vacancyCity,
   employerName: props.application.data.employerName,
 });
+
+const format = (date) => {
+  if (date === 'Not applied') {
+    return 'Not applied';
+  }
+  return new Intl.DateTimeFormat(props.locale).format(new Date(date));
+};
 
 const submit = () => {
   router.put(route('customer.applications.update', apply.id), apply);
@@ -38,7 +52,7 @@ const submit = () => {
   <AuthenticatedLayout>
     <template #header>
       <div class="flex items-center justify-between">
-        <h2 class="heading-2 my-0">Edit Application #{{ apply.vacancyId }}</h2>
+        <h2 class="heading-2 my-0">Edit Application #{{ apply.id }}</h2>
         <div class="flex items-center justify-between space-x-2">
           <Link class="btn btn-secondary btn-outlined block" :href="route('customer.applications.index')">
             <font-awesome-icon icon="arrow-left-long" enctype="multipart/form-data" />
@@ -79,11 +93,11 @@ const submit = () => {
                     <!-- Date Apply-->
                     <div>
                       <InputLabel for="date_apply"
-                        >Date of applying: <span class="accent ml-2">
-                        {{ apply.date_apply }}
-                      </span></InputLabel
+                        >Date of applying:
+                        <span v-if="apply.date_apply === null" class="accent ml-2"> Not applied </span></InputLabel
                       >
-                      <input id="date_apply" type="date" class="block w-full" v-model="apply.date_apply" />
+                      <VueDatePicker v-model="apply.date_apply" :format="format"></VueDatePicker>
+
                       <InputError class="mt-2" :message="apply.errors.date_apply" />
                     </div>
                     <!-- Comment-->
@@ -98,6 +112,12 @@ const submit = () => {
                         placeholder="Enter your comment text..."
                       />
                       <InputError class="mt-2" :message="apply.errors.comment" />
+                    </div>
+                    <!-- Status -->
+                    <div class="">
+                      <InputLabel for="status" value="Status" />
+                      <VueSelect id="status" v-model="apply.status" :options="statuses" />
+                      <InputError class="mt-2" :message="apply.errors.status" />
                     </div>
                     <!-- Cover letter text-->
                     <div class="col-span-2">

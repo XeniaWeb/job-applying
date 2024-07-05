@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -17,6 +18,7 @@ import {
   faHourglass,
 } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import VueDatePicker from '@vuepic/vue-datepicker';
 
 library.add([
   faArrowLeftLong,
@@ -39,6 +41,7 @@ createInertiaApp({
     return createApp({ render: () => h(App, props) })
       .use(plugin)
       .component('font-awesome-icon', FontAwesomeIcon)
+      .component('VueDatePicker', VueDatePicker)
       .use(ZiggyVue)
       .mount(el);
   },

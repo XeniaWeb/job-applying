@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Customer;
 
 use App\Enums\ApplyStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Application\UpdateApplicationRequest;
 use App\Http\Requests\StoreApplicationRequest;
-use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Resources\ApplicationResource;
 use App\Http\Resources\VacancyResource;
 use App\Models\Application;
 use App\Models\Vacancy;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -29,6 +30,7 @@ class ApplicationController extends Controller
 
         return Inertia::render('Customer/Application/ApplicationIndex', [
             'applications' => $applications,
+            'locale' => App::getLocale(),
         ]);
     }
 
@@ -43,6 +45,7 @@ class ApplicationController extends Controller
 
         return Inertia::render('Customer/Application/ApplicationCreate', [
             'vacancies' => $vacancies,
+            'locale' => App::getLocale(),
         ]);
     }
 
@@ -65,7 +68,9 @@ class ApplicationController extends Controller
     public function show(Application $application)
     {
         // TODO show Application
-        return 'Show ID = ' . $application->id;
+        return Inertia::render('Customer/Application/ApplicationShow', [
+            'application' => new ApplicationResource($application)
+        ]);
     }
 
     /**
@@ -73,20 +78,39 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application): Response
     {
-        $statuses = ApplyStatus::forSelect();
-
+        $statuses = collect(ApplyStatus::forSelect());
+        $appStatuses = [];
+        foreach ($statuses as $key => $status) {
+            $obj = new \stdClass();
+            $obj->label = $status;
+            $obj->value = $key;
+            $appStatuses[] = $obj;
+        }
         return Inertia::render('Customer/Application/ApplicationEdit', [
             'application' => new ApplicationResource($application),
-            'statuses' => $statuses,
+            'statuses' => $appStatuses,
+            'locale' => App::getLocale(),
         ]);
     }
 
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function replace(ReplaceApplicationRequest $request, Application $application)
+    // {
+    //     // PUT
+    //     dd($request);
+    // }
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
-        //
+        // dd($request->validated(), $application);
+        // PATCH
+        $application->update($request->validated());
+
+        return response()->redirectToRoute('customer.applications.index');
     }
 
     /**

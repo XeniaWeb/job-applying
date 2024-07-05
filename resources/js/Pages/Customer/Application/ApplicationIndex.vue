@@ -4,9 +4,12 @@ import { Head, Link, router } from '@inertiajs/vue3';
 import PaginationMenu from '@/Components/Elemenrs/PaginationMenu.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
-defineProps({
+const props = defineProps({
   applications: {
     type: Object,
+  },
+  locale: {
+    type: String,
   },
 });
 
@@ -18,6 +21,13 @@ const destroy = (id) => {
 
 const showApp = (id) => {
   router.get(route('customer.applications.show', id));
+};
+
+const formatLocale = (date) => {
+  if (date === 'Not applied') {
+    return null;
+  }
+  return new Intl.DateTimeFormat(props.locale).format(new Date(date));
 };
 </script>
 
@@ -78,7 +88,7 @@ const showApp = (id) => {
               </thead>
               <tbody>
                 <tr
-                  v-for="item in applications.data"
+                  v-for="item in props.applications.data"
                   :key="item.id"
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
@@ -95,8 +105,8 @@ const showApp = (id) => {
                   <td class="px-1 py-1">
                     {{ item.statusValueShort }}
                   </td>
-                  <td class="px-1 py-1">
-                    {{ item.dateApply }}
+                  <td class="px-1 py-1" :class="{ 'text-warning/40 font-thin': !formatLocale(item.dateApply) }">
+                    {{ formatLocale(item.dateApply) ?? 'Not applied' }}
                   </td>
                   <td class="px-1 py-1">
                     {{ item.vacancyCity }}

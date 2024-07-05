@@ -12,6 +12,9 @@ defineProps({
     type: Object,
     required: true,
   },
+  locale: {
+    type: String,
+  },
 });
 
 const newApplication = useForm({
@@ -45,6 +48,7 @@ const submit = () => {
     </template>
 
     <div class="">
+      <pre>{{ newApplication }}</pre>
       <div class="mx-auto mt-4 max-w-7xl pb-4 sm:px-6 lg:px-8">
         <div class="overflow-x-auto bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
           <div class="relative min-w-max overflow-x-auto p-4 shadow-md sm:rounded-lg">
@@ -76,11 +80,14 @@ const submit = () => {
                       <InputError class="mt-2" :message="newApplication.errors.contact" />
                     </div>
                     <!-- Date Apply-->
-                    <div>
-                      <InputLabel for="date_apply" value="Date of applying" />
-                      <TextInput id="date_apply" type="date" class="block w-full" v-model="newApplication.date_apply" />
-                      <InputError class="mt-2" :message="newApplication.errors.date_apply" />
-                    </div>
+                    <VueDatePicker v-model="newApplication.date_apply"></VueDatePicker>
+                    <!--                    <button type="button" @click="save" class="bg-gray-500 text-white px-3 py-2 rounded">-->
+                    <!--                      Save new post</button>-->
+                    <!--                    <div>-->
+                    <!--                      <InputLabel for="date_apply" value="Date of applying" />-->
+                    <!--                      <TextInput id="date_apply" type="date" class="block w-full" v-model="newApplication.date_apply" />-->
+                    <!--                      <InputError class="mt-2" :message="newApplication.errors.date_apply" />-->
+                    <!--                    </div>-->
                     <!-- Comment-->
                     <div>
                       <InputLabel for="comment" value="Comment" />
