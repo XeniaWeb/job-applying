@@ -1,5 +1,5 @@
 <script setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 
 const props = defineProps({
   price: {
@@ -17,16 +17,16 @@ const props = defineProps({
   decimals: {
     type: [Number, String],
     default: 0,
-  }
+  },
 });
 
-const formattedPrice = computed(
-  () => Number(props.price).toLocaleString(props.locale, {
+const formattedPrice = computed(() =>
+  Number(props.price).toLocaleString(props.locale, {
     style: 'currency',
     currency: props.currency,
     maximumFractionDigits: Number(props.decimals),
-  })
-)
+  }),
+);
 </script>
 
 <template>
@@ -35,6 +35,4 @@ const formattedPrice = computed(
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

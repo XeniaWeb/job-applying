@@ -1,1 +1,0 @@
-import{o as e,c as t,F as s,r as n,a as o,t as l}from"./app-Dwfu4F7T.js";const c=o("h1",{class:"text-red-600 font-bold text-2xl text-center"}," Employer Index",-1),u={__name:"EmployerIndex",props:{employers:{type:Object}},setup(a){return(p,d)=>(e(),t(s,null,[c,(e(!0),t(s,null,n(a.employers,r=>(e(),t("div",{key:r.id},l(r.name),1))),128))],64))}};export{u as default};

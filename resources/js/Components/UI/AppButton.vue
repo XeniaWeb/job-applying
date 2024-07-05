@@ -6,57 +6,57 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: 'primary'
+    default: 'primary',
   },
   large: {
     type: Boolean,
-    default: false
+    default: false,
   },
   small: {
     type: Boolean,
-    default: false
+    default: false,
   },
   rounded: {
     type: Boolean,
-    required: false
+    required: false,
   },
   outlined: {
     type: Boolean,
-    required: false
+    required: false,
   },
   icon: {
     type: String,
     required: false,
-  }
+  },
 });
 
 const emit = defineEmits(['click']);
 
 const clickOnButton = () => {
   emit('click');
-}
+};
 </script>
 
 <template>
   <button
-    :class="['btn',
+    :class="[
+      'btn',
       `btn-${color}`,
-      {'btn-rounded': rounded},
-      {'btn-large': large},
-      {'btn-small': small},
+      { 'btn-rounded': rounded },
+      { 'btn-large': large },
+      { 'btn-small': small },
       outlined ? `color-${color} btn-outlined` : '',
-      (icon && !label) ? `btn-icon` : '',
-      (icon && !label && large) ? `btn-icon-large` : '',
-      ]"
+      icon && !label ? `btn-icon` : '',
+      icon && !label && large ? `btn-icon-large` : '',
+    ]"
     @click="clickOnButton"
   >
     <span class="inline-flex items-center justify-center" v-if="icon">
-      <font-awesome-icon :icon="`fa-regular fa-${icon}`"/>
+      <font-awesome-icon :icon="`fa-regular fa-${icon}`" />
     </span>
     <span class="inline-flex items-center justify-center" v-if="label">
       {{ label }}
     </span>
-      <slot />
-
+    <slot />
   </button>
 </template>

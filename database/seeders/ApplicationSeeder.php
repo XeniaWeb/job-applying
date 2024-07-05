@@ -13,6 +13,10 @@ class ApplicationSeeder extends Seeder
      */
     public function run(): void
     {
-        Application::factory(14)->create();
+        Application::factory(14)
+            ->state([
+                'customer_id' => 3,
+            ])
+            ->create();
     }
 }

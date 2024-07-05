@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained('users');
             $table->foreignId('vacancy_id')->constrained('vacancies');
             $table->string('status')->default('draft');
             $table->dateTime('date_apply')->nullable();
             $table->string('contact')->nullable();
             $table->text('text')->nullable();
-            $table->string('letter_file')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();
         });

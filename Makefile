@@ -93,3 +93,9 @@ amrs: ## Make resource with artisan
 
 amrq: ## Make request with artisan
 	@./vendor/bin/sail artisan make:request
+
+p-check: ## prettier check
+	@./vendor/bin/sail npx prettier --check .
+
+p-write: ## prettier check
+	@./vendor/bin/sail npx prettier --write .

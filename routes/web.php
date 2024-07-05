@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\Vacancy\EmployerController;
-use App\Http\Controllers\Admin\Vacancy\VacancyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resume\ResumeController;
 use Illuminate\Foundation\Application;

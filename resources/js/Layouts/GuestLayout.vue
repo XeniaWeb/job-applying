@@ -1,6 +1,6 @@
 <script setup>
-import AppLogoXeniaWeb from "@/Components/AppLogoXeniaWeb.vue";
-import { Link } from '@inertiajs/vue3'
+import AppLogoXeniaWeb from '@/Components/AppLogoXeniaWeb.vue';
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>

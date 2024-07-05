@@ -1,5 +1,5 @@
-@import "ui.css";
-@import "vue3-select-component/dist/style.css";
+@import 'ui.css';
+@import 'vue3-select-component/dist/style.css';
 
 @tailwind base;
 @tailwind components;

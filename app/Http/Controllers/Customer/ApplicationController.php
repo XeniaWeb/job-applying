@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Enums\ApplyStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Application\UpdateApplicationRequest;
 use App\Http\Requests\StoreApplicationRequest;
-use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Resources\ApplicationResource;
 use App\Http\Resources\VacancyResource;
 use App\Models\Application;
 use App\Models\Vacancy;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ApplicationController extends Controller
 {
@@ -26,13 +30,14 @@ class ApplicationController extends Controller
 
         return Inertia::render('Customer/Application/ApplicationIndex', [
             'applications' => $applications,
+            'locale' => App::getLocale(),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): \Inertia\Response
+    public function create(): Response
     {
         $vacancies = VacancyResource::collection(
             Vacancy::query()->orderBy('created_at', 'desc')->get()
@@ -40,6 +45,7 @@ class ApplicationController extends Controller
 
         return Inertia::render('Customer/Application/ApplicationCreate', [
             'vacancies' => $vacancies,
+            'locale' => App::getLocale(),
         ]);
     }
 
@@ -49,16 +55,9 @@ class ApplicationController extends Controller
     public function store(StoreApplicationRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $data['customer_id'] = Auth::id();
 
-        if (!empty($data['letter_file'])) {
-                $card = $data['letter_file']->store('/', 'photos');
-            }
-        $apply = Application::create($data);
-
-        if (!empty($apply->letter_file)) {
-            $apply->update(['letter_file' => $card]);
-        }
-        $apply->fresh();
+        Application::create($data);
 
         return response()->redirectToRoute('customer.applications.index');
     }
@@ -69,24 +68,49 @@ class ApplicationController extends Controller
     public function show(Application $application)
     {
         // TODO show Application
-        return 'Show ID = ' . $application->id;
+        return Inertia::render('Customer/Application/ApplicationShow', [
+            'application' => new ApplicationResource($application)
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Application $application)
+    public function edit(Application $application): Response
     {
-        // TODO edit Application
-        return 'Edit ID = ' . $application->id;
+        $statuses = collect(ApplyStatus::forSelect());
+        $appStatuses = [];
+        foreach ($statuses as $key => $status) {
+            $obj = new \stdClass();
+            $obj->label = $status;
+            $obj->value = $key;
+            $appStatuses[] = $obj;
+        }
+        return Inertia::render('Customer/Application/ApplicationEdit', [
+            'application' => new ApplicationResource($application),
+            'statuses' => $appStatuses,
+            'locale' => App::getLocale(),
+        ]);
     }
 
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function replace(ReplaceApplicationRequest $request, Application $application)
+    // {
+    //     // PUT
+    //     dd($request);
+    // }
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
-        //
+        // dd($request->validated(), $application);
+        // PATCH
+        $application->update($request->validated());
+
+        return response()->redirectToRoute('customer.applications.index');
     }
 
     /**

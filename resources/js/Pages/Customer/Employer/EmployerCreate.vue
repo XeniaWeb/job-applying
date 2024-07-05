@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link, useForm} from "@inertiajs/vue3";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
   name: '',
@@ -10,17 +10,15 @@ const form = useForm({
 </script>
 
 <template>
-  <Head title="New Employer"/>
+  <Head title="New Employer" />
 
   <AuthenticatedLayout>
     <template #header>
       <div class="flex justify-between items-center">
         <h2 class="heading-2 my-0">New Employer</h2>
         <div class="flex items-center space-x-2 justify-between">
-          <Link class="block btn btn-secondary btn-outlined"
-                :href="route('customer.employers.index')"
-          >
-            <font-awesome-icon icon="arrow-left-long" enctype="multipart/form-data"/>
+          <Link class="block btn btn-secondary btn-outlined" :href="route('customer.employers.index')">
+            <font-awesome-icon icon="arrow-left-long" enctype="multipart/form-data" />
             Back to List
           </Link>
         </div>
@@ -35,6 +33,4 @@ const form = useForm({
   </AuthenticatedLayout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
