@@ -97,5 +97,5 @@ amrq: ## Make request with artisan
 p-check: ## prettier check
 	@./vendor/bin/sail npx prettier --check .
 
-p-write: ## prettier check
+p-w: ## prettier write
 	@./vendor/bin/sail npx prettier --write .

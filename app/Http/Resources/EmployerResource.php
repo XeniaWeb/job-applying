@@ -15,15 +15,15 @@ class EmployerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $request->id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'email' => $request->email,
-            'webSite' => $request->web_site,
-            'city' => $request->city,
-            'address' => $request->address,
-            'contact' => $request->contact,
-            'comment' => $request->comment,
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'email' => $this->email,
+            'webSite' => $this->web_site,
+            'city' => $this->city,
+            'address' => $this->address,
+            'contact' => $this->contact,
+            'comment' => $this->comment,
         ];
     }
 }

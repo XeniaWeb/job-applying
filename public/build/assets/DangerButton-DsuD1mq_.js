@@ -1,0 +1,1 @@
+import{_ as o}from"./AppButton-DI-WX7Dk.js";import{o as r,e as t,w as a,k as s}from"./app-BTo386_w.js";const m={__name:"DangerButton",setup(_){return(e,n)=>(r(),t(o,{color:"danger"},{default:a(()=>[s(e.$slots,"default")]),_:3}))}};export{m as _};

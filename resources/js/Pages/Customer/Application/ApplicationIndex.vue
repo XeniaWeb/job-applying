@@ -36,15 +36,18 @@ const formatLocale = (date) => {
 
   <AuthenticatedLayout>
     <template #header>
-      <div class="flex justify-between items-center">
-        <h2 class="heading-2 my-0">Applications</h2>
-        <div class="flex items-center space-x-2 justify-between">
-          <Link class="block btn btn-secondary btn-outlined btn-small" :href="route('customer.employers.create')">
+      <div class="block md:flex justify-between items-center">
+        <h2 class="heading-2 mt-0 mb-2 md:mb-0">Applications</h2>
+        <div class="md:flex items-center md:space-x-2 justify-between">
+          <Link
+            class="hidden lg:inline-block btn btn-secondary btn-outlined btn-small"
+            :href="route('customer.employers.create')"
+          >
             <font-awesome-icon icon="plus" />
             Add Employer
           </Link>
           <Link
-            class="inline-block btn btn-secondary btn-outlined btn-small"
+            class="hidden md:inline-block btn btn-secondary btn-outlined btn-small"
             :href="route('customer.vacancies.create')"
           >
             <font-awesome-icon icon="plus" />
@@ -87,7 +90,13 @@ const formatLocale = (date) => {
                 </tr>
               </thead>
               <tbody>
+                <tr v-if="props.applications.data.length === 0">
+                  <th scope="row" class="bg-white dark:bg-gray-800 dark:border-gray-700 p-2 text-lg">
+                    <p>No Applications yet...</p>
+                  </th>
+                </tr>
                 <tr
+                  v-else
                   v-for="item in props.applications.data"
                   :key="item.id"
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -111,32 +120,33 @@ const formatLocale = (date) => {
                   <td class="px-1 py-1">
                     {{ item.vacancyCity }}
                   </td>
-                  <td class="px-1 py-1 max-w-[12rem] text-wrap">
+                  <td class="px-1 py-1 max-w-[12rem] text-wrap break-all">
                     <p v-if="item.contact">
                       {{ item.contact }}
                     </p>
-                    <p v-if="item.employerContact">
+                    <p v-if="item.employerContact" class="text-wrap break-all">
                       {{ item.employerContact }}
                     </p>
                   </td>
-                  <td class="px-1 py-1 max-w-[10rem] text-wrap">
+                  <td class="px-1 py-1 max-w-[10rem] text-wrap break-all">
                     {{ item.comment }}
                   </td>
                   <td class="px-1 py-1 text-right">
                     <Link
                       :href="route('customer.applications.edit', item.id)"
                       class="btn btn-small btn-outlined btn-primary"
-                      >Edit</Link
-                    >
+                      >Edit
+                    </Link>
                   </td>
                   <td class="px-1 py-1 text-right">
-                    <DangerButton @click="destroy(item.id)" type="submit" class="btn-small">Del </DangerButton>
+                    <DangerButton @click="destroy(item.id)" type="submit" class="btn-small">Del</DangerButton>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+
         <PaginationMenu :meta="applications.meta" />
       </div>
     </div>
