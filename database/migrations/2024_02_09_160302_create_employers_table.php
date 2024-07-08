@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('address')->nullable();
             $table->string('contact')->nullable();
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

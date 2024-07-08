@@ -6,19 +6,27 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputLabel from '@/Components/UI/InputLabel.vue';
 import TextInput from '@/Components/UI/TextInput.vue';
 
-const newEmployer = useForm({
-  name: '',
-  description: '',
-  email: '',
-  web_site: '',
-  city: '',
-  address: '',
-  contact: '',
-  comment: '',
+const props = defineProps({
+  employer: {
+    type: Object,
+    required: true,
+  },
+});
+
+const updatedEmployer = useForm({
+  id: props.employer.data.id,
+  name: props.employer.data.name,
+  description: props.employer.data.description,
+  email: props.employer.data.email,
+  web_site: props.employer.data.webSite,
+  city: props.employer.data.city,
+  address: props.employer.data.address,
+  contact: props.employer.data.contact,
+  comment: props.employer.data.comment,
 });
 
 const submit = () => {
-  newEmployer.post(route('customer.employers.store'));
+  updatedEmployer.put(route('customer.employers.update', props.employer.data.id));
 };
 </script>
 
@@ -57,11 +65,11 @@ const submit = () => {
                         id="name"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.name"
+                        v-model="updatedEmployer.name"
                         autocomplete="on"
                         placeholder="Enter company name..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.name" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.name" />
                     </div>
 
                     <!-- Description-->
@@ -71,11 +79,11 @@ const submit = () => {
                         id="description"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.description"
+                        v-model="updatedEmployer.description"
                         autocomplete="on"
                         placeholder="Enter description..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.description" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.description" />
                     </div>
 
                     <!-- Email-->
@@ -85,11 +93,11 @@ const submit = () => {
                         id="email"
                         type="email"
                         class="block w-full"
-                        v-model="newEmployer.email"
+                        v-model="updatedEmployer.email"
                         autocomplete="on"
                         placeholder="example@example.com ..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.email" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.email" />
                     </div>
 
                     <!-- Web site-->
@@ -99,11 +107,11 @@ const submit = () => {
                         id="web_site"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.web_site"
+                        v-model="updatedEmployer.web_site"
                         autocomplete="on"
                         placeholder="https://example.com ..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.web_site" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.web_site" />
                     </div>
 
                     <!-- City-->
@@ -113,11 +121,11 @@ const submit = () => {
                         id="city"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.city"
+                        v-model="updatedEmployer.city"
                         autocomplete="on"
                         placeholder="Enter city..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.city" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.city" />
                     </div>
 
                     <!-- Address-->
@@ -127,11 +135,11 @@ const submit = () => {
                         id="address"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.address"
+                        v-model="updatedEmployer.address"
                         autocomplete="on"
                         placeholder="Enter address..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.address" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.address" />
                     </div>
                     <!-- Contact-->
                     <div class="mb-4">
@@ -140,11 +148,11 @@ const submit = () => {
                         id="contact"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.contact"
+                        v-model="updatedEmployer.contact"
                         autocomplete="on"
                         placeholder="Enter conntact..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.contact" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.contact" />
                     </div>
 
                     <!-- Comment-->
@@ -154,11 +162,11 @@ const submit = () => {
                         id="comment"
                         type="text"
                         class="block w-full"
-                        v-model="newEmployer.comment"
+                        v-model="updatedEmployer.comment"
                         autocomplete="on"
                         placeholder="Enter your comment text..."
                       />
-                      <InputError class="mt-2" :message="newEmployer.errors.comment" />
+                      <InputError class="mt-2" :message="updatedEmployer.errors.comment" />
                     </div>
                   </div>
                 </fieldset>
@@ -166,8 +174,8 @@ const submit = () => {
                 <div class="mt-4">
                   <PrimaryButton
                     class="flex w-full justify-center md:w-auto"
-                    :class="{ 'opacity-25': newEmployer.processing }"
-                    :disabled="newEmployer.processing"
+                    :class="{ 'opacity-25': updatedEmployer.processing }"
+                    :disabled="updatedEmployer.processing"
                     label="Save"
                   />
                 </div>

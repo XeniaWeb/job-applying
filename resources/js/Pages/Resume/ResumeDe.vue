@@ -9,11 +9,11 @@
             <td class="w-[200px] align-top">
               <table class="w-full text-left border-collapse">
                 <tbody>
-                  <tr class="border-collapse">
-                    <td class="pt-2 pb-4">
-                      <img src="/images/024.jpg" alt="Photo Oksana Bürki" class="block w-[190px] h-auto ml-2" />
-                    </td>
-                  </tr>
+                  <!--                  <tr class="border-collapse">-->
+                  <!--                    <td class="pt-2 pb-4">-->
+                  <!--                      <img src="/images/024.jpg" alt="Photo Oksana Bürki" class="block w-[190px] h-auto ml-2" />-->
+                  <!--                    </td>-->
+                  <!--                  </tr>-->
                   <tr class="border-r border-black">
                     <td
                       style="font-family: 'Noto Serif', serif; font-weight: 700; font-size: 24px"

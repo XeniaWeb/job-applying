@@ -24,9 +24,9 @@ class ApplicationController extends Controller
     public function index()
     {
         // TODO make Repository
-        $apps = Application::query()->paginate(6);
-
-        $applications = ApplicationResource::collection($apps);
+        $applications = ApplicationResource::collection(
+            Application::query()->orderBy('created_at', 'desc')->paginate(6)
+        );
 
         return Inertia::render('Customer/Application/ApplicationIndex', [
             'applications' => $applications,

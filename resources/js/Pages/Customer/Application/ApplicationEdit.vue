@@ -51,10 +51,13 @@ const submit = () => {
 
   <AuthenticatedLayout>
     <template #header>
-      <div class="flex items-center justify-between">
-        <h2 class="heading-2 my-0">Edit Application #{{ apply.id }}</h2>
-        <div class="flex items-center justify-between space-x-2">
-          <Link class="btn btn-secondary btn-outlined block" :href="route('customer.applications.index')">
+      <div class="block md:flex justify-between items-center">
+        <h2 class="heading-2 mt-0 mb-2 md:mb-0">Edit Application #{{ apply.id }}</h2>
+        <div class="md:flex items-center md:space-x-2 justify-between">
+          <Link
+            class="btn btn-secondary btn-outlined inline-block btn-small"
+            :href="route('customer.applications.index')"
+          >
             <font-awesome-icon icon="arrow-left-long" enctype="multipart/form-data" />
             Back to List
           </Link>
@@ -64,8 +67,8 @@ const submit = () => {
 
     <div class="">
       <div class="mx-auto mt-4 max-w-7xl pb-4 sm:px-6 lg:px-8">
-        <div class="overflow-x-auto bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-          <div class="relative min-w-max overflow-x-auto p-4 shadow-md sm:rounded-lg">
+        <div class="bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
+          <div class="relative p-4 shadow-md sm:rounded-lg">
             <div class="flex flex-col px-8 py-2">
               <form @submit.prevent="submit" class="min-h-screen">
                 <fieldset class="border-b pb-4">
@@ -77,7 +80,7 @@ const submit = () => {
                     >
                     <span class="block"></span>
                   </div>
-                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div class="md:grid md:gap-x-4 md:grid-cols-2">
                     <!-- Contact-->
                     <div>
                       <InputLabel for="contact" value="Contact" />
